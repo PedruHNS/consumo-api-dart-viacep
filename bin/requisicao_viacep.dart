@@ -1,13 +1,13 @@
-import '../repositories/endereco_repository.dart';
+import 'package:requisicao_viacep/controller/endereco_controller.dart';
+import 'package:requisicao_viacep/repositories/endereco_repository.dart';
+import 'package:requisicao_viacep/services/http_packege.dart';
 
 void main(List<String> arguments) async {
-  final repository = EnderecoRepository();
+  final buscaCep = EnderecoController(
+    repository: EnderecoRepository(
+      client: HttpPackege(),
+    ),
+  );
 
-  try {
-    final cep = await repository.getCep(83750000);
-
-    print(cep);
-  } catch (e) {
-    print('cep invalido ');
-  }
+  buscaCep.getEndereco(cep: 21032025);
 }
